@@ -1,2 +1,5 @@
 vendor/
 composer.lock
+# Rector cache
+.rector-cache/
+.idea/

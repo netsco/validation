@@ -511,7 +511,13 @@ The field under validation must be present and not empty only when any of the ot
 </details>
 
 <details><summary><strong>required_with_all</strong>:field_1,field_2,...</summary>
+# PHP 8 Compatibility
 
+This project supports PHP 7.0 and higher, including PHP 8.0, 8.1, and 8.2.
+
+## Upgrading Code Using Rector
+
+To upgrade code syntax for PHP 8 compatibility, you can use Rector which is included as a dev dependency:
 The field under validation must be present and not empty only if all of the other specified fields are present.
 
 </details>
