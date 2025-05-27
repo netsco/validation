@@ -342,6 +342,7 @@ class Validation
         if ($this->validator->isUsingHumanizedKey()) {
             return $attribute->getHumanizedKey();
         }
+
         return $attribute->getKey();
     }
 
@@ -423,6 +424,7 @@ class Validation
         if (is_array($value) || is_object($value)) {
             return json_encode($value);
         }
+
         return '';
     }
 

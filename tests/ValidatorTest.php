@@ -7,7 +7,6 @@ use Rakit\Validation\RuleNotFoundException;
 use Rakit\Validation\RuleQuashException;
 use DateTime;
 use PHPUnit\Framework\TestCase;
-use Rakit\Validation\Rule;
 use Rakit\Validation\Rules\UploadedFile;
 use Rakit\Validation\ValidationException;
 use Rakit\Validation\Validator;

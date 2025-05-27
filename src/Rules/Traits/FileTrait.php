@@ -2,7 +2,6 @@
 
 namespace Rakit\Validation\Rules\Traits;
 
-use InvalidArgumentException;
 use Rakit\Validation\Helper;
 
 trait FileTrait

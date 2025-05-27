@@ -37,6 +37,7 @@ trait SizeTrait
         if (is_array($value)) {
             return (float) count($value);
         }
+
         return false;
     }
 
