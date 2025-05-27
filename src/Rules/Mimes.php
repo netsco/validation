@@ -79,7 +79,7 @@ class Mimes extends Rule
         }
 
         if (!empty($allowedTypes)) {
-            $guesser = new MimeTypeGuesser;
+            $guesser = new MimeTypeGuesser();
             $ext = $guesser->getExtension($value['type']);
             unset($guesser);
 

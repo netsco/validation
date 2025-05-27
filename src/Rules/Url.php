@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Url extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute is not valid url";
 

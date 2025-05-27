@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class ErrorBagTest extends TestCase
 {
-
     public function testCount(): void
     {
         $errors = new ErrorBag([

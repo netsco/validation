@@ -7,10 +7,9 @@ use PHPUnit\Framework\TestCase;
 
 class UploadedFileTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         $this->rule = new UploadedFile();
     }

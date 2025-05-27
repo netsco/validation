@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class Ipv4Test extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Ipv4;
+        $this->rule = new Ipv4();
     }
 
     public function testValids(): void

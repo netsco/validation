@@ -7,13 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 class CallbackTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Callback;
-        $this->rule->setCallback(fn($value): bool => is_numeric($value) && $value % 2 === 0);
+        $this->rule = new Callback();
+        $this->rule->setCallback(fn ($value): bool => is_numeric($value) && $value % 2 === 0);
     }
 
     public function testValids(): void

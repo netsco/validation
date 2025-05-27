@@ -4,7 +4,6 @@ namespace Rakit\Validation;
 
 class Helper
 {
-
     /**
      * Determine if a given string matches a given pattern.
      * Adapted from: https://github.com/illuminate/support/blob/v5.3.23/Str.php#L119
@@ -240,6 +239,6 @@ class Helper
             $suffix = $prefix;
         }
 
-        return array_map(fn($str): string => $prefix . $str . $suffix, $strings);
+        return array_map(fn ($str): string => $prefix . $str . $suffix, $strings);
     }
 }

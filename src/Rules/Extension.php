@@ -7,15 +7,14 @@ use Rakit\Validation\Rule;
 
 class Extension extends Rule
 {
-    
     /** @var string */
     protected $message = "The :attribute must be a :allowed_extensions file";
 
-     /**
-     * Given $params and assign the $this->params
-     *
-     * @return self
-     */
+    /**
+    * Given $params and assign the $this->params
+    *
+    * @return self
+    */
     public function fillParameters(array $params): Rule
     {
         if (count($params) == 1 && is_array($params[0])) {
@@ -25,7 +24,7 @@ class Extension extends Rule
         $this->params['allowed_extensions'] = $params;
         return $this;
     }
-    
+
     /**
      * Check the $value is valid
      *

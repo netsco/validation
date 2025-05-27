@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class MinTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Min;
+        $this->rule = new Min();
     }
 
     public function testValids(): void

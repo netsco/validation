@@ -16,9 +16,9 @@ class ValidatorTest extends TestCase
     /** @var Validator */
     protected $validator;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->validator = new Validator;
+        $this->validator = new Validator();
     }
 
     public function testPasses(): void
@@ -822,7 +822,7 @@ class ValidatorTest extends TestCase
     public function testEmptyArrayAssocValidation(): void
     {
         $validation = $this->validator->validate([], [
-            'user'=> 'required',
+            'user' => 'required',
             'user.email' => 'email',
         ]);
 
@@ -1442,7 +1442,7 @@ class ValidatorTest extends TestCase
             $this->assertSame(
                 [
                     'thing' => [
-                        'required'=> 'The Thing is required'
+                        'required' => 'The Thing is required'
                     ]
                 ],
                 $validationException->getErrors()

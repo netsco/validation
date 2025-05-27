@@ -4,7 +4,6 @@ namespace Rakit\Validation;
 
 class ErrorBag
 {
-
     /** @var array */
     protected $messages = [];
 

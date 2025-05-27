@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Regex extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute is not valid format";
 

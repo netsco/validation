@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class NumericTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Numeric;
+        $this->rule = new Numeric();
     }
 
     public function testValids(): void

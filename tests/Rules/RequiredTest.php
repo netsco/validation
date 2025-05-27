@@ -8,12 +8,11 @@ use stdClass;
 
 class RequiredTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Required;
+        $this->rule = new Required();
     }
 
     public function testValids(): void
@@ -24,7 +23,7 @@ class RequiredTest extends TestCase
         $this->assertTrue($this->rule->check(true));
         $this->assertTrue($this->rule->check('0'));
         $this->assertTrue($this->rule->check(0));
-        $this->assertTrue($this->rule->check(new stdClass));
+        $this->assertTrue($this->rule->check(new stdClass()));
     }
 
     public function testInvalids(): void

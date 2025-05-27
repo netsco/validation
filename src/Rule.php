@@ -2,8 +2,6 @@
 
 namespace Rakit\Validation;
 
-use Rakit\Validation\MissingRequiredParameterException;
-
 abstract class Rule
 {
     /** @var string */

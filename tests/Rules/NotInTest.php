@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class NotInTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new NotIn;
+        $this->rule = new NotIn();
     }
 
     public function testValids(): void

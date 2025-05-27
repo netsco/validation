@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Date extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute is not valid date format";
 

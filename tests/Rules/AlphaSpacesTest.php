@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class AlphaSpacesTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new AlphaSpaces;
+        $this->rule = new AlphaSpaces();
     }
 
     public function testValids(): void

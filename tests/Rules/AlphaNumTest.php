@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class AlphaNumTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new AlphaNum;
+        $this->rule = new AlphaNum();
     }
 
     public function testValids(): void

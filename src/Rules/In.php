@@ -7,7 +7,6 @@ use Rakit\Validation\Rule;
 
 class In extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute only allows :allowed_values";
 

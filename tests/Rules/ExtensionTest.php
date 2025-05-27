@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class ExtensionTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Extension;
+        $this->rule = new Extension();
     }
 
     public function testValids(): void

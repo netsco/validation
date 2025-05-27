@@ -6,7 +6,6 @@ use Rakit\Validation\Helper;
 
 trait FileTrait
 {
-
     /**
      * Check whether value is from $_FILES
      */

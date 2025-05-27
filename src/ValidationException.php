@@ -61,7 +61,7 @@ class ValidationException extends Exception
     /**
      * Get all the validation error messages.
      */
-    public function getErrors():array
+    public function getErrors(): array
     {
         return $this->validation->errors()->toArray();
     }

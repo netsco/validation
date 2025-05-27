@@ -9,13 +9,12 @@ use DateTime;
 
 class BeforeTest extends TestCase
 {
-
     /**
      * @var Before
      */
     protected $validator;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         $this->validator = new Before();
     }

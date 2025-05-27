@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class AcceptedTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Accepted;
+        $this->rule = new Accepted();
     }
 
     public function testValids(): void

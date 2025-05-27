@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class RegexTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Regex;
+        $this->rule = new Regex();
     }
 
     public function testValids(): void

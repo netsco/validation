@@ -168,7 +168,7 @@ class UploadedFile extends Rule implements BeforeValidate
         }
 
         if (!empty($allowedTypes)) {
-            $guesser = new MimeTypeGuesser;
+            $guesser = new MimeTypeGuesser();
             $ext = $guesser->getExtension($value['type']);
             unset($guesser);
 

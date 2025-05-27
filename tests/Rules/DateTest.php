@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class DateTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Date;
+        $this->rule = new Date();
     }
 
     public function testValids(): void

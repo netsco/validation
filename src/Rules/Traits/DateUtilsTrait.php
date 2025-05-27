@@ -6,7 +6,6 @@ use Exception;
 
 trait DateUtilsTrait
 {
-
     /**
      * Check the $date is valid
      */

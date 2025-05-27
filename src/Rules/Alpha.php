@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Alpha extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute only allows alphabet characters";
 

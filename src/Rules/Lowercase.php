@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Lowercase extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute must be lowercase";
 

@@ -9,9 +9,9 @@ class BooleanTest extends TestCase
 {
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Boolean;
+        $this->rule = new Boolean();
     }
 
     public function testValids(): void

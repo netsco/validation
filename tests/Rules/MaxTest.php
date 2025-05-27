@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class MaxTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Max;
+        $this->rule = new Max();
     }
 
     public function testValids(): void

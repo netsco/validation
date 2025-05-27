@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class IpTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Ip;
+        $this->rule = new Ip();
     }
 
     public function testValids(): void

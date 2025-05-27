@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class EmailTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Email;
+        $this->rule = new Email();
     }
 
     public function testValids(): void

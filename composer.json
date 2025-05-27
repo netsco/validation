@@ -24,9 +24,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
-    "squizlabs/php_codesniffer": "^3",
-    "php-coveralls/php-coveralls": "^2.2",
-    "rector/rector": "^1.2"
+    "rector/rector": "^1.2",
+    "laravel/pint": "^1.22"
   },
   "config": {
     "platform": {
@@ -36,9 +35,11 @@
   "scripts": {
     "test": [
         "phpunit",
-        "phpcs"
+        "pint"
     ],
     "rector": "rector",
-    "rector:dry-run": "rector --dry-run"
+    "rector:dry-run": "rector --dry-run",
+    "pint": "pint",
+    "pint:test": "pint --test"
   }
 }

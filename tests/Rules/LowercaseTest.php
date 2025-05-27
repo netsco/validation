@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class LowercaseTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Lowercase;
+        $this->rule = new Lowercase();
     }
 
     public function testValids(): void

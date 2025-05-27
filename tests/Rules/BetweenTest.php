@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class BetweenTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Between;
+        $this->rule = new Between();
     }
 
     public function testValids(): void
@@ -35,7 +34,7 @@ class BetweenTest extends TestCase
 
     public function testUploadedFileValue(): void
     {
-        $mb = fn($n): int|float => $n * 1024 * 1024;
+        $mb = fn ($n): int|float => $n * 1024 * 1024;
 
         $sampleFile = [
             'name' => pathinfo(__FILE__, PATHINFO_BASENAME),

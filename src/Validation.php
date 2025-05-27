@@ -49,7 +49,7 @@ class Validation
     ) {
         $this->inputs = $this->resolveInputAttributes($inputs);
         $this->messages = $messages;
-        $this->errors = new ErrorBag;
+        $this->errors = new ErrorBag();
         foreach ($rules as $attributeKey => $rules) {
             $this->addAttribute($attributeKey, $rules);
         }
@@ -82,7 +82,7 @@ class Validation
      */
     public function validate(array $inputs = []): void
     {
-        $this->errors = new ErrorBag; // reset error bag
+        $this->errors = new ErrorBag(); // reset error bag
         $this->inputs = array_merge($this->inputs, $this->resolveInputAttributes($inputs));
 
         // Before validation hooks
@@ -159,7 +159,7 @@ class Validation
             }
         }
 
-        if ($isValid && ($value!==null || $inputIsset)) {
+        if ($isValid && ($value !== null || $inputIsset)) {
             $this->setValidData($attribute, $value);
         } elseif (!$isValid) {
             $this->setInvalidData($attribute, $value);
@@ -313,7 +313,7 @@ class Validation
      */
     protected function isEmptyValue(mixed $value): bool
     {
-        $requiredValidator = new Required;
+        $requiredValidator = new Required();
         return false === $requiredValidator->check($value);
     }
 
@@ -474,7 +474,7 @@ class Validation
         $exp = explode(':', $rule, 2);
         $rulename = $exp[0];
         if ($rulename !== 'regex') {
-            $params = isset($exp[1])? explode(',', $exp[1]) : [];
+            $params = isset($exp[1]) ? explode(',', $exp[1]) : [];
         } else {
             $params = [$exp[1]];
         }
@@ -541,7 +541,7 @@ class Validation
     /**
      * Given $key and get value
      */
-    public function inputIsset(string $key):bool
+    public function inputIsset(string $key): bool
     {
         return Helper::arrayIsset($this->inputs, $key);
     }

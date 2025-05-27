@@ -4,7 +4,6 @@ namespace Rakit\Validation;
 
 class Attribute
 {
-
     /** @var array */
     protected $rules = [];
 
@@ -111,7 +110,7 @@ class Attribute
      */
     public function getRule(string $ruleKey)
     {
-        return $this->hasRule($ruleKey)? $this->rules[$ruleKey] : null;
+        return $this->hasRule($ruleKey) ? $this->rules[$ruleKey] : null;
     }
 
     /**

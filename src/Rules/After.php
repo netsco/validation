@@ -8,7 +8,6 @@ use Rakit\Validation\Rule;
 
 class After extends Rule
 {
-
     use DateUtilsTrait;
 
     /** @var string */

@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class UrlTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Url;
+        $this->rule = new Url();
     }
 
     public function testValids(): void

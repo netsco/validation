@@ -9,7 +9,6 @@ use Closure;
 
 class Callback extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute is not valid";
 

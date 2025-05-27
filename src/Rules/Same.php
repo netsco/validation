@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Same extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute must be same as :field";
 

@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class AlphaDashTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new AlphaDash;
+        $this->rule = new AlphaDash();
     }
 
     public function testValids(): void

@@ -7,12 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class JsonTest extends TestCase
 {
-
     public $rule;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
-        $this->rule = new Json;
+        $this->rule = new Json();
     }
 
     public function testValids(): void
