@@ -48,6 +48,7 @@ class Url extends Rule
         if (!$schemes) {
             return $this->validateCommonScheme($value);
         }
+
         foreach ($schemes as $scheme) {
             $method = 'validate' . ucfirst($scheme) .'Scheme';
             if (method_exists($this, $method)) {
@@ -58,6 +59,7 @@ class Url extends Rule
                 return true;
             }
         }
+
         return false;
     }
 
@@ -77,6 +79,7 @@ class Url extends Rule
         if (!$scheme) {
             return $this->validateBasic($value) && (bool) preg_match("/^\w+:\/\//i", $value);
         }
+
         return $this->validateBasic($value) && (bool) preg_match("/^{$scheme}:\/\//", $value);
     }
 

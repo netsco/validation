@@ -21,21 +21,23 @@ trait SizeTrait
         ) {
             $value = (float) $value;
         }
+
         if (is_int($value) || is_float($value)) {
             return (float) $value;
         }
+
         if (is_string($value)) {
             return (float) mb_strlen($value, 'UTF-8');
         }
+
         if ($this->isUploadedFileValue($value)) {
             return (float) $value['size'];
         }
 
         if (is_array($value)) {
             return (float) count($value);
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

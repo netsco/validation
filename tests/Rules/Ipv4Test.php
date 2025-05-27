@@ -9,6 +9,7 @@ class Ipv4Test extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Ipv4;

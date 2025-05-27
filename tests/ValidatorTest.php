@@ -835,7 +835,7 @@ class ValidatorTest extends TestCase
      *
      * @dataProvider rootAsteriskProvider
      */
-    public function testRootAsteriskValidation(array $data, array $rules, array $errors = null): void
+    public function testRootAsteriskValidation(array $data, array $rules, ?array $errors = null): void
     {
         $validation = $this->validator->validate($data, $rules);
         $this->assertSame($errors === null || $errors === [], $validation->passes());

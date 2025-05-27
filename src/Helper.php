@@ -233,10 +233,8 @@ class Helper
 
     /**
      * Wrap string[] by given $prefix and $suffix
-     *
-     * @param  string|null  $suffix
      */
-    public static function wraps(array $strings, string $prefix, string $suffix = null): array
+    public static function wraps(array $strings, string $prefix, ?string $suffix = null): array
     {
         if (is_null($suffix)) {
             $suffix = $prefix;

@@ -9,6 +9,7 @@ class MimesTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Mimes();

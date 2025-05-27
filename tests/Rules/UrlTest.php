@@ -9,6 +9,7 @@ class UrlTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Url;

@@ -9,6 +9,7 @@ class RegexTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Regex;

@@ -9,6 +9,7 @@ class AlphaNumTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new AlphaNum;

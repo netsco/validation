@@ -9,6 +9,7 @@ class AcceptedTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Accepted;

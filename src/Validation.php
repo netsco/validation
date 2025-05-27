@@ -334,14 +334,15 @@ class Validation
         if (isset($this->aliases[$attribute->getKey()])) {
             return $this->aliases[$attribute->getKey()];
         }
+
         if ($primaryAttribute && isset($this->aliases[$primaryAttribute->getKey()])) {
             return $this->aliases[$primaryAttribute->getKey()];
         }
+
         if ($this->validator->isUsingHumanizedKey()) {
             return $attribute->getHumanizedKey();
-        } else {
-            return $attribute->getKey();
         }
+        return $attribute->getKey();
     }
 
     /**
@@ -418,11 +419,11 @@ class Validation
         if (is_string($value) || is_numeric($value)) {
             return $value;
         }
+
         if (is_array($value) || is_object($value)) {
             return json_encode($value);
-        } else {
-            return '';
         }
+        return '';
     }
 
     /**

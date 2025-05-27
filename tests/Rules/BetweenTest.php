@@ -9,6 +9,7 @@ class BetweenTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Between;

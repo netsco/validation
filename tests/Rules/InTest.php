@@ -9,6 +9,7 @@ class InTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new In;

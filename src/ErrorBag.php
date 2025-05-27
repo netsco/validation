@@ -48,10 +48,12 @@ class ErrorBag
             $messages = $this->filterMessagesForWildcardKey($key, $ruleName);
             return Helper::arrayDot($messages) !== [];
         }
+
         $messages = $this->messages[$key] ?? null;
         if (!$ruleName) {
             return !empty($messages);
         }
+
         return !empty($messages) && isset($messages[$ruleName]);
     }
 
@@ -68,13 +70,16 @@ class ErrorBag
             $flattenMessages = Helper::arrayDot($messages);
             return array_shift($flattenMessages);
         }
+
         $keyMessages = $this->messages[$key] ?? [];
         if (empty($keyMessages)) {
             return null;
         }
+
         if ($ruleName) {
             return $keyMessages[$ruleName] ?? null;
         }
+
         return array_shift($keyMessages);
     }
 

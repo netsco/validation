@@ -9,6 +9,7 @@ class Ipv6Test extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Ipv6;

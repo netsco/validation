@@ -9,6 +9,7 @@ class NumericTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Numeric;

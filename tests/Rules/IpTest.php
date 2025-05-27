@@ -9,6 +9,7 @@ class IpTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Ip;

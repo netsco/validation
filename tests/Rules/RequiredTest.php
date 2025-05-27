@@ -10,6 +10,7 @@ class RequiredTest extends TestCase
 {
 
     public $rule;
+
     protected function setUp():void
     {
         $this->rule = new Required;
