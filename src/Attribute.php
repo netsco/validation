@@ -55,7 +55,7 @@ class Attribute
     /**
      * Set the primary attribute
      *
-     * @param \Rakit\Validation\Attribute $primaryAttribute
+     * @param Attribute $primaryAttribute
      * @return void
      */
     public function setPrimaryAttribute(Attribute $primaryAttribute)
@@ -77,7 +77,7 @@ class Attribute
     /**
      * Get primary attributes
      *
-     * @return \Rakit\Validation\Attribute|null
+     * @return Validation|null
      */
     public function getPrimaryAttribute()
     {
@@ -101,7 +101,7 @@ class Attribute
     /**
      * Add other attributes
      *
-     * @param \Rakit\Validation\Attribute $otherAttribute
+     * @param Attribute $otherAttribute
      * @return void
      */
     public function addOtherAttribute(Attribute $otherAttribute)
@@ -211,7 +211,7 @@ class Attribute
      * @param string|null $key
      * @return mixed
      */
-    public function getValue(string $key = null)
+    public function getValue(?string $key = null)
     {
         if ($key && $this->isArrayAttribute()) {
             $key = $this->resolveSiblingKey($key);

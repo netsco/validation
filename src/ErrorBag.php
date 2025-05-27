@@ -209,7 +209,7 @@ class ErrorBag
      * @param mixed  $ruleName
      * @return array
      */
-    protected function filterMessagesForWildcardKey(string $key, $ruleName = null): array
+    protected function filterMessagesForWildcardKey(string $key, ?string $ruleName = null): array
     {
         $messages = $this->messages;
         $pattern = preg_quote($key, '#');

@@ -244,7 +244,7 @@ class Helper
      * @param  string|null  $lastSeparator
      * @return string
      */
-    public static function join(array $pieces, string $separator, string $lastSeparator = null): string
+    public static function join(array $pieces, string $separator, ?string $lastSeparator = null): string
     {
         if (is_null($lastSeparator)) {
             $lastSeparator = $separator;
