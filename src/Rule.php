@@ -145,7 +145,7 @@ abstract class Rule
      */
     public function parameter(string $key)
     {
-        return isset($this->params[$key])? $this->params[$key] : null;
+        return $this->params[$key] ?? null;
     }
 
     /**

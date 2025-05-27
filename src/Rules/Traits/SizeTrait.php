@@ -57,7 +57,7 @@ trait SizeTrait
         }
 
         $number = (float) $match['number'];
-        $format = isset($match['format']) ? $match['format'] : '';
+        $format = $match['format'] ?? '';
 
         switch (strtoupper($format)) {
             case "KB":
@@ -66,19 +66,19 @@ trait SizeTrait
 
             case "MB":
             case "M":
-                return $number * pow(1024, 2);
+                return $number * 1024 ** 2;
 
             case "GB":
             case "G":
-                return $number * pow(1024, 3);
+                return $number * 1024 ** 3;
 
             case "TB":
             case "T":
-                return $number * pow(1024, 4);
+                return $number * 1024 ** 4;
 
             case "PB":
             case "P":
-                return $number * pow(1024, 5);
+                return $number * 1024 ** 5;
 
             default:
                 return $number;

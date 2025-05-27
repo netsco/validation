@@ -276,8 +276,6 @@ class Helper
             $suffix = $prefix;
         }
 
-        return array_map(function ($str) use ($prefix, $suffix) {
-            return $prefix . $str . $suffix;
-        }, $strings);
+        return array_map(fn($str) => $prefix . $str . $suffix, $strings);
     }
 }

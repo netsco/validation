@@ -45,6 +45,6 @@ class Defaults extends Rule implements ModifyValue
     protected function isEmptyValue($value): bool
     {
         $requiredValidator = new Required;
-        return false === $requiredValidator->check($value, []);
+        return false === $requiredValidator->check($value);
     }
 }

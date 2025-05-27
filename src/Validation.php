@@ -81,7 +81,7 @@ class Validation
      */
     public function getAttribute(string $attributeKey)
     {
-        return isset($this->attributes[$attributeKey])? $this->attributes[$attributeKey] : null;
+        return $this->attributes[$attributeKey] ?? null;
     }
 
     /**
@@ -173,7 +173,7 @@ class Validation
 
         if ($isValid && ($value!==null || $inputIsset)) {
             $this->setValidData($attribute, $value);
-        } else if (!$isValid) {
+        } elseif (!$isValid) {
             $this->setInvalidData($attribute, $value);
         }
     }
@@ -345,7 +345,7 @@ class Validation
     protected function isEmptyValue($value): bool
     {
         $requiredValidator = new Required;
-        return false === $requiredValidator->check($value, []);
+        return false === $requiredValidator->check($value);
     }
 
     /**
@@ -492,7 +492,7 @@ class Validation
             $params = [];
 
             if (is_string($rule)) {
-                list($rulename, $params) = $this->parseRule($rule);
+                [$rulename, $params] = $this->parseRule($rule);
                 $validator = call_user_func_array($validatorFactory, array_merge([$rulename], $params));
             } elseif ($rule instanceof Rule) {
                 $validator = $rule;
@@ -549,7 +549,7 @@ class Validation
      */
     public function getAlias(string $attributeKey)
     {
-        return isset($this->aliases[$attributeKey])? $this->aliases[$attributeKey] : null;
+        return $this->aliases[$attributeKey] ?? null;
     }
 
     /**

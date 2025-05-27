@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class BetweenTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp():void
     {
         $this->rule = new Between;
     }
@@ -33,9 +33,7 @@ class BetweenTest extends TestCase
 
     public function testUploadedFileValue()
     {
-        $mb = function ($n) {
-            return $n * 1024 * 1024;
-        };
+        $mb = fn($n) => $n * 1024 * 1024;
 
         $sampleFile = [
             'name' => pathinfo(__FILE__, PATHINFO_BASENAME),
