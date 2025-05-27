@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class ErrorBagTest extends TestCase
 {
 
-    public function testCount()
+    public function testCount(): void
     {
         $errors = new ErrorBag([
             'email' => [
@@ -24,7 +24,7 @@ class ErrorBagTest extends TestCase
         $this->assertEquals($errors->count(), 4);
     }
 
-    public function testAdd()
+    public function testAdd(): void
     {
         $errors = new ErrorBag();
 
@@ -45,7 +45,7 @@ class ErrorBagTest extends TestCase
         ]);
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $errors = new ErrorBag([
             'email' => [
@@ -78,7 +78,7 @@ class ErrorBagTest extends TestCase
         $this->assertFalse($errors->has('items.0.*:unregistered_rule'));
     }
 
-    public function testFirst()
+    public function testFirst(): void
     {
         $errors = new ErrorBag([
             'email' => [
@@ -113,7 +113,7 @@ class ErrorBagTest extends TestCase
         $this->assertNull($errors->first('items.1.id_product:unregistered_rule'));
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $errors = new ErrorBag([
             'email' => [
@@ -204,7 +204,7 @@ class ErrorBagTest extends TestCase
         ]);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $errors = new ErrorBag([
             'email' => [
@@ -241,7 +241,7 @@ class ErrorBagTest extends TestCase
         ]);
     }
 
-    public function testFirstOfAll()
+    public function testFirstOfAll(): void
     {
         $errors = new ErrorBag([
             'email' => [
@@ -279,7 +279,7 @@ class ErrorBagTest extends TestCase
         ]);
     }
 
-    public function testFirstOfAllDotNotation()
+    public function testFirstOfAllDotNotation(): void
     {
         $errors = new ErrorBag([
             'email' => [

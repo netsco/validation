@@ -2,6 +2,8 @@
 
 namespace Rakit\Validation;
 
-class RuleQuashException extends \Exception
+use Exception;
+
+class RuleQuashException extends Exception
 {
 }

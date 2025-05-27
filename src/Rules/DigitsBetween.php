@@ -17,7 +17,6 @@ class DigitsBetween extends Rule
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {
@@ -28,7 +27,7 @@ class DigitsBetween extends Rule
 
         $length = strlen((string) $value);
 
-        return ! preg_match('/[^0-9]/', $value)
+        return in_array(preg_match('/[^0-9]/', $value), [0, false], true)
                     && $length >= $min && $length <= $max;
     }
 }

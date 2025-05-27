@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class AlphaDashTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new AlphaDash;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('123'));
         $this->assertTrue($this->rule->check('abc'));
@@ -23,7 +24,7 @@ class AlphaDashTest extends TestCase
         $this->assertTrue($this->rule->check('213-foo'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('foo bar'));
         $this->assertFalse($this->rule->check('123 bar '));

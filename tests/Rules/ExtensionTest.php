@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class ExtensionTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Extension;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->fillParameters(['pdf','png','txt'])->check('somefile.txt'));
         $this->assertTrue($this->rule->fillParameters(['.pdf','.png','.txt'])->check('somefile.txt'));
@@ -22,7 +23,7 @@ class ExtensionTest extends TestCase
         $this->assertTrue($this->rule->fillParameters(['pdf','png','txt'])->check('https://site.test/somefile.txt'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->fillParameters(['pdf','png','txt'])->check(''));
         $this->assertFalse($this->rule->fillParameters(['pdf','png','txt'])->check('.dotfile'));

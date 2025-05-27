@@ -2,6 +2,7 @@
 
 namespace Rakit\Validation\Rules;
 
+use Exception;
 use Rakit\Validation\Rule;
 
 class Boolean extends Rule
@@ -13,8 +14,7 @@ class Boolean extends Rule
      * Check the value is valid
      *
      * @param mixed $value
-     * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function check($value): bool
     {

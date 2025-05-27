@@ -2,11 +2,12 @@
 
 namespace Rakit\Validation\Rules;
 
+use Rakit\Validation\Rules\Traits\SizeTrait;
 use Rakit\Validation\Rule;
 
 class Max extends Rule
 {
-    use Traits\SizeTrait;
+    use SizeTrait;
 
     /** @var string */
     protected $message = "The :attribute maximum is :max";
@@ -18,7 +19,6 @@ class Max extends Rule
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {

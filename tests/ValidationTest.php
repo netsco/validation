@@ -10,12 +10,10 @@ use ReflectionClass;
 class ValidationTest extends TestCase
 {
     /**
-     * @param string $rules
-     * @param array $expectedResult
      *
      * @dataProvider parseRuleProvider
      */
-    public function testParseRule($rules, $expectedResult)
+    public function testParseRule(string $rules, array $expectedResult): void
     {
         $class = new ReflectionClass(Validation::class);
         $method = $class->getMethod('parseRule');
@@ -27,10 +25,7 @@ class ValidationTest extends TestCase
         $this->assertSame($expectedResult, $result);
     }
 
-    /**
-     * @return array
-     */
-    public function parseRuleProvider()
+    public function parseRuleProvider(): array
     {
         return [
             [

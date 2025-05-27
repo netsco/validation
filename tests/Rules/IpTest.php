@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class IpTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Ip;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('1.2.3.4'));
         $this->assertTrue($this->rule->check('255.255.255.255'));
@@ -21,7 +22,7 @@ class IpTest extends TestCase
         $this->assertTrue($this->rule->check('2001:0000:3238:DFE1:0063:0000:0000:FEFB'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('1.2.3.4.5'));
         $this->assertFalse($this->rule->check('256.255.255.255'));

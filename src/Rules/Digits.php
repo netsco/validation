@@ -17,7 +17,6 @@ class Digits extends Rule
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {
@@ -25,7 +24,7 @@ class Digits extends Rule
 
         $length = (int) $this->parameter('length');
 
-        return ! preg_match('/[^0-9]/', $value)
+        return in_array(preg_match('/[^0-9]/', $value), [0, false], true)
                     && strlen((string) $value) == $length;
     }
 }

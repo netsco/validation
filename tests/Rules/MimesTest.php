@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class MimesTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Mimes();
     }
 
-    public function testValidMimes()
+    public function testValidMimes(): void
     {
         $file = [
             'name' => pathinfo(__FILE__, PATHINFO_BASENAME),
@@ -37,7 +38,7 @@ class MimesTest extends TestCase
     /**
      * Make sure we can't just passing array like valid $_FILES['key']
      */
-    public function testValidateWithoutMockShouldBeInvalid()
+    public function testValidateWithoutMockShouldBeInvalid(): void
     {
         $this->assertFalse($this->rule->check([
             'name' => pathinfo(__FILE__, PATHINFO_BASENAME),
@@ -51,7 +52,7 @@ class MimesTest extends TestCase
     /**
      * Missing UPLOAD_ERR_NO_FILE should be valid because it is job for required rule
      */
-    public function testEmptyMimesShouldBeValid()
+    public function testEmptyMimesShouldBeValid(): void
     {
         $this->assertTrue($this->rule->check([
             'name' => '',
@@ -62,7 +63,7 @@ class MimesTest extends TestCase
         ]));
     }
 
-    public function testUploadError()
+    public function testUploadError(): void
     {
         $this->assertFalse($this->rule->check([
             'name' => '',
@@ -73,7 +74,7 @@ class MimesTest extends TestCase
         ]));
     }
 
-    public function testFileTypes()
+    public function testFileTypes(): void
     {
 
         $rule = $this->getMockBuilder(Mimes::class)
@@ -114,7 +115,7 @@ class MimesTest extends TestCase
     /**
      * Missing array key(s) should be valid because it is job for required rule
      */
-    public function testMissingAKeyShouldBeValid()
+    public function testMissingAKeyShouldBeValid(): void
     {
         // missing name
         $this->assertTrue($this->rule->check([

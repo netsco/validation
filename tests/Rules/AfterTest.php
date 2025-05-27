@@ -2,6 +2,7 @@
 
 namespace Rakit\Validation\Tests;
 
+use Exception;
 use Rakit\Validation\Rules\After;
 use PHPUnit\Framework\TestCase;
 use DateTime;
@@ -10,11 +11,11 @@ class AfterTest extends TestCase
 {
 
     /**
-     * @var \Rakit\Validation\Rules\After
+     * @var After
      */
     protected $validator;
 
-    public function setUp():void
+    protected function setUp():void
     {
         $this->validator = new After();
     }
@@ -22,7 +23,7 @@ class AfterTest extends TestCase
     /**
      * @dataProvider getValidDates
      */
-    public function testOnlyAWellFormedDateCanBeValidated($date)
+    public function testOnlyAWellFormedDateCanBeValidated(int|string $date): void
     {
         $this->assertTrue(
             $this->validator->fillParameters(["3 years ago"])->check($date)
@@ -32,19 +33,19 @@ class AfterTest extends TestCase
     /**
      * @dataProvider getInvalidDates
      */
-    public function testANonWellFormedDateCannotBeValidated($date)
+    public function testANonWellFormedDateCannotBeValidated(int|string $date): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->validator->fillParameters(["tomorrow"])->check($date);
     }
 
-    public function testUserProvidedParamCannotBeValidatedBecauseItIsInvalid()
+    public function testUserProvidedParamCannotBeValidatedBecauseItIsInvalid(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->validator->fillParameters(["to,morrow"])->check("now");
     }
 
-    public function getInvalidDates()
+    public function getInvalidDates(): array
     {
         $now = new DateTime();
 
@@ -58,7 +59,7 @@ class AfterTest extends TestCase
         ];
     }
 
-    public function getValidDates()
+    public function getValidDates(): array
     {
         $now = new DateTime();
 
@@ -72,7 +73,7 @@ class AfterTest extends TestCase
         ];
     }
 
-    public function testProvidedDateFailsValidation()
+    public function testProvidedDateFailsValidation(): void
     {
 
         $now = (new DateTime("today"))->format("Y-m-d");

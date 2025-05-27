@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class AlphaNumTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new AlphaNum;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('123'));
         $this->assertTrue($this->rule->check('abc'));
@@ -21,7 +22,7 @@ class AlphaNumTest extends TestCase
         $this->assertTrue($this->rule->check('abc123'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('foo 123'));
         $this->assertFalse($this->rule->check('123 foo'));

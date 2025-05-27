@@ -2,6 +2,7 @@
 
 namespace Rakit\Validation\Tests;
 
+use Exception;
 use Rakit\Validation\Rules\Before;
 use PHPUnit\Framework\TestCase;
 use DateTime;
@@ -10,11 +11,11 @@ class BeforeTest extends TestCase
 {
 
     /**
-     * @var \Rakit\Validation\Rules\Before
+     * @var Before
      */
     protected $validator;
 
-    public function setUp():void
+    protected function setUp():void
     {
         $this->validator = new Before();
     }
@@ -22,14 +23,14 @@ class BeforeTest extends TestCase
     /**
      * @dataProvider getValidDates
      */
-    public function testOnlyAWellFormedDateCanBeValidated($date)
+    public function testOnlyAWellFormedDateCanBeValidated(int|string $date): void
     {
         $this->assertTrue(
             $this->validator->fillParameters(["next week"])->check($date)
         );
     }
 
-    public function getValidDates()
+    public function getValidDates(): array
     {
         $now = new DateTime();
 
@@ -46,13 +47,13 @@ class BeforeTest extends TestCase
     /**
      * @dataProvider getInvalidDates
      */
-    public function testANonWellFormedDateCannotBeValidated($date)
+    public function testANonWellFormedDateCannotBeValidated(int|string $date): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->validator->fillParameters(["tomorrow"])->check($date);
     }
 
-    public function getInvalidDates()
+    public function getInvalidDates(): array
     {
         $now = new DateTime();
 
@@ -66,7 +67,7 @@ class BeforeTest extends TestCase
         ];
     }
 
-    public function testProvidedDateFailsValidation()
+    public function testProvidedDateFailsValidation(): void
     {
 
         $now = (new DateTime("today"))->format("Y-m-d");
@@ -81,9 +82,9 @@ class BeforeTest extends TestCase
         );
     }
 
-    public function testUserProvidedParamCannotBeValidatedBecauseItIsInvalid()
+    public function testUserProvidedParamCannotBeValidatedBecauseItIsInvalid(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->validator->fillParameters(["to,morrow"])->check("now");
     }
 }

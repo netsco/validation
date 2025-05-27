@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class IntegerTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Integer;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check(0));
         $this->assertTrue($this->rule->check('0'));
@@ -23,7 +24,7 @@ class IntegerTest extends TestCase
         $this->assertTrue($this->rule->check(-123));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('foo123'));
         $this->assertFalse($this->rule->check('123foo'));

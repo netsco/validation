@@ -2,12 +2,14 @@
 
 namespace Rakit\Validation\Rules;
 
+use Rakit\Validation\Rules\Traits\DateUtilsTrait;
+use Exception;
 use Rakit\Validation\Rule;
 
 class After extends Rule
 {
 
-    use Traits\DateUtilsTrait;
+    use DateUtilsTrait;
 
     /** @var string */
     protected $message = "The :attribute must be a date after :time.";
@@ -19,8 +21,7 @@ class After extends Rule
      * Check the value is valid
      *
      * @param mixed $value
-     * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function check($value): bool
     {

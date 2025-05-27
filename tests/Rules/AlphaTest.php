@@ -9,18 +9,19 @@ use stdClass;
 class AlphaTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Alpha;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('foo'));
         $this->assertTrue($this->rule->check('foobar'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check(2));
         $this->assertFalse($this->rule->check([]));

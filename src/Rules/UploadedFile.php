@@ -2,6 +2,8 @@
 
 namespace Rakit\Validation\Rules;
 
+use Rakit\Validation\Rules\Traits\FileTrait;
+use Rakit\Validation\Rules\Traits\SizeTrait;
 use Rakit\Validation\Helper;
 use Rakit\Validation\MimeTypeGuesser;
 use Rakit\Validation\Rule;
@@ -9,16 +11,16 @@ use Rakit\Validation\Rules\Interfaces\BeforeValidate;
 
 class UploadedFile extends Rule implements BeforeValidate
 {
-    use Traits\FileTrait, Traits\SizeTrait;
-
+    use FileTrait;
+    use SizeTrait;
     /** @var string */
     protected $message = "The :attribute is not valid uploaded file";
 
     /** @var string|int */
-    protected $maxSize = null;
+    protected $maxSize;
 
     /** @var string|int */
-    protected $minSize = null;
+    protected $minSize;
 
     /** @var array */
     protected $allowedTypes = [];
@@ -26,7 +28,6 @@ class UploadedFile extends Rule implements BeforeValidate
     /**
      * Given $params and assign $this->params
      *
-     * @param array $params
      * @return self
      */
     public function fillParameters(array $params): Rule
@@ -80,10 +81,9 @@ class UploadedFile extends Rule implements BeforeValidate
     /**
      * Given $types and assign $this->params
      *
-     * @param mixed $types
      * @return self
      */
-    public function fileTypes($types): Rule
+    public function fileTypes(mixed $types): Rule
     {
         if (is_string($types)) {
             $types = explode('|', $types);
@@ -97,7 +97,7 @@ class UploadedFile extends Rule implements BeforeValidate
     /**
      * {@inheritDoc}
      */
-    public function beforeValidate()
+    public function beforeValidate(): void
     {
         $attribute = $this->getAttribute();
 
@@ -125,7 +125,6 @@ class UploadedFile extends Rule implements BeforeValidate
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {
@@ -139,7 +138,7 @@ class UploadedFile extends Rule implements BeforeValidate
         }
 
         // below is Required rule job
-        if (!$this->isValueFromUploadedFiles($value) or $value['error'] == UPLOAD_ERR_NO_FILE) {
+        if (!$this->isValueFromUploadedFiles($value) || $value['error'] == UPLOAD_ERR_NO_FILE) {
             return true;
         }
 

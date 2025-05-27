@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class DigitsBetweenTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new DigitsBetween;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->fillParameters([2, 6])->check(12345));
         $this->assertTrue($this->rule->fillParameters([2, 3])->check(12));
@@ -21,7 +22,7 @@ class DigitsBetweenTest extends TestCase
         $this->assertTrue($this->rule->fillParameters([3, 5])->check('12345'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->fillParameters([4, 6])->check(12));
         $this->assertFalse($this->rule->fillParameters([1, 3])->check(12345));

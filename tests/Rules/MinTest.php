@@ -8,19 +8,20 @@ use PHPUnit\Framework\TestCase;
 class MinTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Min;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->fillParameters([100])->check(123));
         $this->assertTrue($this->rule->fillParameters([6])->check('foobar'));
         $this->assertTrue($this->rule->fillParameters([3])->check([1,2,3]));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->fillParameters([7])->check('foobar'));
         $this->assertFalse($this->rule->fillParameters([4])->check([1,2,3]));
@@ -32,7 +33,7 @@ class MinTest extends TestCase
         $this->assertFalse($this->rule->fillParameters([2])->check('字'));
     }
 
-    public function testUploadedFileValue()
+    public function testUploadedFileValue(): void
     {
         $twoMega = 1024 * 1024 * 2;
         $sampleFile = [

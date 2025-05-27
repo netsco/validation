@@ -2,6 +2,7 @@
 
 namespace Rakit\Validation\Rules;
 
+use Exception;
 use Rakit\Validation\Rule;
 use InvalidArgumentException;
 use Closure;
@@ -18,7 +19,6 @@ class Callback extends Rule
     /**
      * Set the Callback closure
      *
-     * @param Closure $callback
      * @return self
      */
     public function setCallback(Closure $callback): Rule
@@ -30,8 +30,7 @@ class Callback extends Rule
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function check($value): bool
     {
@@ -49,10 +48,8 @@ class Callback extends Rule
         if (is_string($invalidMessage)) {
             $this->setMessage($invalidMessage);
             return false;
-        } elseif (false === $invalidMessage) {
-            return false;
         }
 
-        return true;
+        return false !== $invalidMessage;
     }
 }

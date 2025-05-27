@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class MaxTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Max;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->fillParameters([200])->check(123));
         $this->assertTrue($this->rule->fillParameters([6])->check('foobar'));
@@ -25,14 +26,14 @@ class MaxTest extends TestCase
         $this->assertTrue($this->rule->fillParameters([1])->check('字'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->fillParameters([5])->check('foobar'));
         $this->assertFalse($this->rule->fillParameters([2])->check([1,2,3]));
         $this->assertFalse($this->rule->fillParameters([100])->check(123));
     }
 
-    public function testUploadedFileValue()
+    public function testUploadedFileValue(): void
     {
         $twoMega = 1024 * 1024 * 2;
         $sampleFile = [

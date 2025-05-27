@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class HelperTest extends TestCase
 {
 
-    public function testArrayHas()
+    public function testArrayHas(): void
     {
         $array = [
             'foo' => [
@@ -30,7 +30,7 @@ class HelperTest extends TestCase
         $this->assertFalse(Helper::arrayHas($array, 'one.two'));
     }
 
-    public function testArrayGet()
+    public function testArrayGet(): void
     {
         $array = [
             'foo' => [
@@ -50,7 +50,7 @@ class HelperTest extends TestCase
         $this->assertNull(Helper::arrayGet($array, 'one.two'));
     }
 
-    public function testArrayDot()
+    public function testArrayDot(): void
     {
         $array = [
             'foo' => [
@@ -80,7 +80,7 @@ class HelperTest extends TestCase
         ]);
     }
 
-    public function testArraySet()
+    public function testArraySet(): void
     {
         $array = [
             'comments' => [
@@ -102,7 +102,7 @@ class HelperTest extends TestCase
         ]);
     }
 
-    public function testArrayUnset()
+    public function testArrayUnset(): void
     {
         $array = [
             'users' => [
@@ -132,7 +132,7 @@ class HelperTest extends TestCase
         ]);
     }
 
-    public function testJoin()
+    public function testJoin(): void
     {
         $pieces0 = [];
         $pieces1 = [1];
@@ -148,7 +148,7 @@ class HelperTest extends TestCase
         $this->assertEquals(Helper::join($pieces3, $separator, $lastSeparator), '1, 2, and 3');
     }
 
-    public function testWraps()
+    public function testWraps(): void
     {
         $inputs = [1, 2, 3];
 

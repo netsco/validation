@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class JsonTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Json;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('{}'));
         $this->assertTrue($this->rule->check('[]'));
@@ -23,7 +24,7 @@ class JsonTest extends TestCase
         $this->assertTrue($this->rule->check('{"number": 12345678}'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check(''));
         $this->assertFalse($this->rule->check(123));

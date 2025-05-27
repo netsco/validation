@@ -2,22 +2,23 @@
 
 namespace Rakit\Validation\Rules;
 
+use Rakit\Validation\Rules\Traits\FileTrait;
 use Rakit\Validation\Helper;
 use Rakit\Validation\MimeTypeGuesser;
 use Rakit\Validation\Rule;
 
 class Mimes extends Rule
 {
-    use Traits\FileTrait;
+    use FileTrait;
 
     /** @var string */
     protected $message = "The :attribute file type must be :allowed_types";
 
     /** @var string|int */
-    protected $maxSize = null;
+    protected $maxSize;
 
     /** @var string|int */
-    protected $minSize = null;
+    protected $minSize;
 
     /** @var array */
     protected $allowedTypes = [];
@@ -25,7 +26,6 @@ class Mimes extends Rule
     /**
      * Given $params and assign $this->params
      *
-     * @param array $params
      * @return self
      */
     public function fillParameters(array $params): Rule
@@ -37,10 +37,9 @@ class Mimes extends Rule
     /**
      * Given $types and assign $this->params
      *
-     * @param mixed $types
      * @return self
      */
-    public function allowTypes($types): Rule
+    public function allowTypes(mixed $types): Rule
     {
         if (is_string($types)) {
             $types = explode('|', $types);
@@ -55,7 +54,6 @@ class Mimes extends Rule
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {
@@ -67,7 +65,7 @@ class Mimes extends Rule
         }
 
         // below is Required rule job
-        if (!$this->isValueFromUploadedFiles($value) or $value['error'] == UPLOAD_ERR_NO_FILE) {
+        if (!$this->isValueFromUploadedFiles($value) || $value['error'] == UPLOAD_ERR_NO_FILE) {
             return true;
         }
 

@@ -43,7 +43,7 @@ class ValidationException extends Exception
     {
         $messages = $validation->errors()->all();
 
-        if (! count($messages) || ! is_string($messages[0])) {
+        if (count($messages) === 0 || ! is_string($messages[0])) {
             return 'The given data was invalid.';
         }
 
@@ -52,7 +52,7 @@ class ValidationException extends Exception
         if ($count = $validation->errors()->count()) {
             $pluralized = $count === 1 ? 'error' : 'errors';
 
-            $message .= ' '."and $count more $pluralized";
+            $message .= ' '."and {$count} more {$pluralized}";
         }
 
         return $message;
@@ -60,8 +60,6 @@ class ValidationException extends Exception
 
     /**
      * Get all the validation error messages.
-     *
-     * @return array
      */
     public function getErrors():array
     {
@@ -74,7 +72,7 @@ class ValidationException extends Exception
      * @param  int  $status
      * @return $this
      */
-    public function status($status)
+    public function status($status): static
     {
         $this->status = $status;
 

@@ -2,10 +2,57 @@
 
 namespace Rakit\Validation;
 
+use Rakit\Validation\Traits\TranslationsTrait;
+use Rakit\Validation\Traits\MessagesTrait;
+use Rakit\Validation\Rules\Required;
+use Rakit\Validation\Rules\RequiredIf;
+use Rakit\Validation\Rules\RequiredUnless;
+use Rakit\Validation\Rules\RequiredWith;
+use Rakit\Validation\Rules\RequiredWithout;
+use Rakit\Validation\Rules\RequiredWithAll;
+use Rakit\Validation\Rules\RequiredWithoutAll;
+use Rakit\Validation\Rules\Email;
+use Rakit\Validation\Rules\Alpha;
+use Rakit\Validation\Rules\Numeric;
+use Rakit\Validation\Rules\AlphaNum;
+use Rakit\Validation\Rules\AlphaDash;
+use Rakit\Validation\Rules\AlphaSpaces;
+use Rakit\Validation\Rules\In;
+use Rakit\Validation\Rules\NotIn;
+use Rakit\Validation\Rules\Min;
+use Rakit\Validation\Rules\Max;
+use Rakit\Validation\Rules\Between;
+use Rakit\Validation\Rules\Url;
+use Rakit\Validation\Rules\Integer;
+use Rakit\Validation\Rules\Boolean;
+use Rakit\Validation\Rules\Ip;
+use Rakit\Validation\Rules\Ipv4;
+use Rakit\Validation\Rules\Ipv6;
+use Rakit\Validation\Rules\Extension;
+use Rakit\Validation\Rules\TypeArray;
+use Rakit\Validation\Rules\Same;
+use Rakit\Validation\Rules\Regex;
+use Rakit\Validation\Rules\Date;
+use Rakit\Validation\Rules\Accepted;
+use Rakit\Validation\Rules\Present;
+use Rakit\Validation\Rules\Different;
+use Rakit\Validation\Rules\UploadedFile;
+use Rakit\Validation\Rules\Mimes;
+use Rakit\Validation\Rules\Callback;
+use Rakit\Validation\Rules\Before;
+use Rakit\Validation\Rules\After;
+use Rakit\Validation\Rules\Lowercase;
+use Rakit\Validation\Rules\Uppercase;
+use Rakit\Validation\Rules\Json;
+use Rakit\Validation\Rules\Digits;
+use Rakit\Validation\Rules\DigitsBetween;
+use Rakit\Validation\Rules\Defaults;
+use Rakit\Validation\Rules\Nullable;
+
 class Validator
 {
-    use Traits\TranslationsTrait, Traits\MessagesTrait;
-
+    use TranslationsTrait;
+    use MessagesTrait;
     /** @var array */
     protected $translations = [];
 
@@ -21,7 +68,6 @@ class Validator
     /**
      * Constructor
      *
-     * @param array $messages
      * @return void
      */
     public function __construct(array $messages = [])
@@ -34,10 +80,8 @@ class Validator
      * Register or override existing validator
      *
      * @param mixed $key
-     * @param \Rakit\Validation\Rule $rule
-     * @return void
      */
-    public function setValidator(string $key, Rule $rule)
+    public function setValidator(string $key, Rule $rule): void
     {
         $this->validators[$key] = $rule;
         $rule->setKey($key);
@@ -46,21 +90,15 @@ class Validator
     /**
      * Get validator object from given $key
      *
-     * @param mixed $key
      * @return mixed
      */
-    public function getValidator($key)
+    public function getValidator(mixed $key)
     {
         return $this->validators[$key] ?? null;
     }
 
     /**
      * Validate $inputs
-     *
-     * @param array $inputs
-     * @param array $rules
-     * @param array $messages
-     * @return Validation
      */
     public function validate(array $inputs, array $rules, array $messages = []): Validation
     {
@@ -71,11 +109,6 @@ class Validator
 
     /**
      * Given $inputs, $rules and $messages to make the Validation class instance
-     *
-     * @param array $inputs
-     * @param array $rules
-     * @param array $messages
-     * @return Validation
      */
     public function make(array $inputs, array $rules, array $messages = []): Validation
     {
@@ -89,8 +122,6 @@ class Validator
     /**
      * Magic invoke method to make Rule instance
      *
-     * @param string $rule
-     * @return Rule
      * @throws RuleNotFoundException
      */
     public function __invoke(string $rule): Rule
@@ -117,51 +148,51 @@ class Validator
     protected function registerBaseValidators()
     {
         $baseValidator = [
-            'required'                  => new Rules\Required,
-            'required_if'               => new Rules\RequiredIf,
-            'required_unless'           => new Rules\RequiredUnless,
-            'required_with'             => new Rules\RequiredWith,
-            'required_without'          => new Rules\RequiredWithout,
-            'required_with_all'         => new Rules\RequiredWithAll,
-            'required_without_all'      => new Rules\RequiredWithoutAll,
-            'email'                     => new Rules\Email,
-            'alpha'                     => new Rules\Alpha,
-            'numeric'                   => new Rules\Numeric,
-            'alpha_num'                 => new Rules\AlphaNum,
-            'alpha_dash'                => new Rules\AlphaDash,
-            'alpha_spaces'              => new Rules\AlphaSpaces,
-            'in'                        => new Rules\In,
-            'not_in'                    => new Rules\NotIn,
-            'min'                       => new Rules\Min,
-            'max'                       => new Rules\Max,
-            'between'                   => new Rules\Between,
-            'url'                       => new Rules\Url,
-            'integer'                   => new Rules\Integer,
-            'boolean'                   => new Rules\Boolean,
-            'ip'                        => new Rules\Ip,
-            'ipv4'                      => new Rules\Ipv4,
-            'ipv6'                      => new Rules\Ipv6,
-            'extension'                 => new Rules\Extension,
-            'array'                     => new Rules\TypeArray,
-            'same'                      => new Rules\Same,
-            'regex'                     => new Rules\Regex,
-            'date'                      => new Rules\Date,
-            'accepted'                  => new Rules\Accepted,
-            'present'                   => new Rules\Present,
-            'different'                 => new Rules\Different,
-            'uploaded_file'             => new Rules\UploadedFile,
-            'mimes'                     => new Rules\Mimes,
-            'callback'                  => new Rules\Callback,
-            'before'                    => new Rules\Before,
-            'after'                     => new Rules\After,
-            'lowercase'                 => new Rules\Lowercase,
-            'uppercase'                 => new Rules\Uppercase,
-            'json'                      => new Rules\Json,
-            'digits'                    => new Rules\Digits,
-            'digits_between'            => new Rules\DigitsBetween,
-            'defaults'                  => new Rules\Defaults,
-            'default'                   => new Rules\Defaults, // alias of defaults
-            'nullable'                  => new Rules\Nullable,
+            'required'                  => new Required,
+            'required_if'               => new RequiredIf,
+            'required_unless'           => new RequiredUnless,
+            'required_with'             => new RequiredWith,
+            'required_without'          => new RequiredWithout,
+            'required_with_all'         => new RequiredWithAll,
+            'required_without_all'      => new RequiredWithoutAll,
+            'email'                     => new Email,
+            'alpha'                     => new Alpha,
+            'numeric'                   => new Numeric,
+            'alpha_num'                 => new AlphaNum,
+            'alpha_dash'                => new AlphaDash,
+            'alpha_spaces'              => new AlphaSpaces,
+            'in'                        => new In,
+            'not_in'                    => new NotIn,
+            'min'                       => new Min,
+            'max'                       => new Max,
+            'between'                   => new Between,
+            'url'                       => new Url,
+            'integer'                   => new Integer,
+            'boolean'                   => new Boolean,
+            'ip'                        => new Ip,
+            'ipv4'                      => new Ipv4,
+            'ipv6'                      => new Ipv6,
+            'extension'                 => new Extension,
+            'array'                     => new TypeArray,
+            'same'                      => new Same,
+            'regex'                     => new Regex,
+            'date'                      => new Date,
+            'accepted'                  => new Accepted,
+            'present'                   => new Present,
+            'different'                 => new Different,
+            'uploaded_file'             => new UploadedFile,
+            'mimes'                     => new Mimes,
+            'callback'                  => new Callback,
+            'before'                    => new Before,
+            'after'                     => new After,
+            'lowercase'                 => new Lowercase,
+            'uppercase'                 => new Uppercase,
+            'json'                      => new Json,
+            'digits'                    => new Digits,
+            'digits_between'            => new DigitsBetween,
+            'defaults'                  => new Defaults,
+            'default'                   => new Defaults, // alias of defaults
+            'nullable'                  => new Nullable,
         ];
 
         foreach ($baseValidator as $key => $validator) {
@@ -171,12 +202,8 @@ class Validator
 
     /**
      * Given $ruleName and $rule to add new validator
-     *
-     * @param string $ruleName
-     * @param \Rakit\Validation\Rule $rule
-     * @return void
      */
-    public function addValidator(string $ruleName, Rule $rule)
+    public function addValidator(string $ruleName, Rule $rule): void
     {
         if (!$this->allowRuleOverride && array_key_exists($ruleName, $this->validators)) {
             throw new RuleQuashException(
@@ -189,30 +216,22 @@ class Validator
 
     /**
      * Set rule can allow to be overrided
-     *
-     * @param boolean $status
-     * @return void
      */
-    public function allowRuleOverride(bool $status = false)
+    public function allowRuleOverride(bool $status = false): void
     {
         $this->allowRuleOverride = $status;
     }
 
     /**
      * Set this can use humanize keys
-     *
-     * @param boolean $useHumanizedKeys
-     * @return void
      */
-    public function setUseHumanizedKeys(bool $useHumanizedKeys = true)
+    public function setUseHumanizedKeys(bool $useHumanizedKeys = true): void
     {
         $this->useHumanizedKeys = $useHumanizedKeys;
     }
 
     /**
      * Get $this->useHumanizedKeys value
-     *
-     * @return void
      */
     public function isUsingHumanizedKey(): bool
     {

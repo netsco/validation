@@ -7,12 +7,13 @@ use Rakit\Validation\Rules\Boolean;
 
 class BooleanTest extends TestCase
 {
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Boolean;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check(\true));
         $this->assertTrue($this->rule->check(\false));
@@ -24,7 +25,7 @@ class BooleanTest extends TestCase
         $this->assertTrue($this->rule->check('n'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check(11));
         $this->assertFalse($this->rule->check([]));

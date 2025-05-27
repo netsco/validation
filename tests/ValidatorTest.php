@@ -2,6 +2,9 @@
 
 namespace Rakit\Validation\Tests;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use Rakit\Validation\RuleNotFoundException;
+use Rakit\Validation\RuleQuashException;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Rakit\Validation\Rule;
@@ -19,7 +22,7 @@ class ValidatorTest extends TestCase
         $this->validator = new Validator;
     }
 
-    public function testPasses()
+    public function testPasses(): void
     {
         $validation = $this->validator->validate([
             'email' => 'emsifa@gmail.com'
@@ -36,7 +39,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validation->passes());
     }
 
-    public function testFails()
+    public function testFails(): void
     {
         $validation = $this->validator->validate([
             'email' => 'emsifa@gmail.com'
@@ -53,7 +56,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validation->fails());
     }
 
-    public function testSkipEmptyRule()
+    public function testSkipEmptyRule(): void
     {
         $validation = $this->validator->validate([
             'email' => 'emsifa@gmail.com'
@@ -67,7 +70,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validation->passes());
     }
 
-    public function testRequiredUploadedFile()
+    public function testRequiredUploadedFile(): void
     {
         $empty_file = [
             'name' => '',
@@ -88,7 +91,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('file:required'));
     }
 
-    public function testOptionalUploadedFile()
+    public function testOptionalUploadedFile(): void
     {
         $emptyFile = [
             'name' => '',
@@ -109,7 +112,7 @@ class ValidatorTest extends TestCase
     /**
      * @dataProvider getSamplesMissingKeyFromUploadedFileValue
      */
-    public function testMissingKeyUploadedFile($uploadedFile)
+    public function testMissingKeyUploadedFile($uploadedFile): void
     {
         $validation = $this->validator->validate([
             'file' => $uploadedFile
@@ -122,7 +125,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('file:required'));
     }
 
-    public function getSamplesMissingKeyFromUploadedFileValue()
+    public function getSamplesMissingKeyFromUploadedFileValue(): array
     {
         $validUploadedFile = [
             'name' => 'foo',
@@ -133,15 +136,16 @@ class ValidatorTest extends TestCase
         ];
 
         $samples = [];
-        foreach ($validUploadedFile as $key => $value) {
+        foreach (array_keys($validUploadedFile) as $key) {
             $uploadedFile = $validUploadedFile;
             unset($uploadedFile[$key]);
             $samples[] = $uploadedFile;
         }
+
         return $samples;
     }
 
-    public function testValidationShouldCorrectlyResolveMultipleFileUploads()
+    public function testValidationShouldCorrectlyResolveMultipleFileUploads(): void
     {
         // Test from input files:
         // <input type="file" name="photos[]"/>
@@ -202,7 +206,7 @@ class ValidatorTest extends TestCase
         ]);
     }
 
-    public function testValidationShouldCorrectlyResolveAssocFileUploads()
+    public function testValidationShouldCorrectlyResolveAssocFileUploads(): void
     {
         // Test from input files:
         // <input type="file" name="photos[foo]"/>
@@ -264,7 +268,7 @@ class ValidatorTest extends TestCase
         ]);
     }
 
-    public function testValidationShouldCorrectlyResolveComplexFileUploads()
+    public function testValidationShouldCorrectlyResolveComplexFileUploads(): void
     {
         // Test from input files:
         // <input type="file" name="files[foo][bar][baz]"/>
@@ -395,7 +399,7 @@ class ValidatorTest extends TestCase
         ]);
     }
 
-    public function getMockedUploadedFileRule()
+    public function getMockedUploadedFileRule(): MockObject
     {
         $rule = $this->getMockBuilder(UploadedFile::class)
             ->setMethods(['isUploadedFile'])
@@ -406,7 +410,7 @@ class ValidatorTest extends TestCase
         return $rule;
     }
 
-    public function testRequiredIfRule()
+    public function testRequiredIfRule(): void
     {
         $v1 = $this->validator->validate([
             'a' => '',
@@ -427,7 +431,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($v2->passes());
     }
 
-    public function testRequiredUnlessRule()
+    public function testRequiredUnlessRule(): void
     {
         $v1 = $this->validator->validate([
             'a' => '',
@@ -448,7 +452,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($v2->passes());
     }
 
-    public function testRequiredWithRule()
+    public function testRequiredWithRule(): void
     {
         $v1 = $this->validator->validate([
             'b' => '',
@@ -468,7 +472,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($v2->passes());
     }
 
-    public function testRequiredWithoutRule()
+    public function testRequiredWithoutRule(): void
     {
         $v1 = $this->validator->validate([
             'b' => '',
@@ -488,7 +492,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($v2->passes());
     }
 
-    public function testRequiredWithAllRule()
+    public function testRequiredWithAllRule(): void
     {
         $v1 = $this->validator->validate([
             'b' => '',
@@ -510,7 +514,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($v2->passes());
     }
 
-    public function testRequiredWithoutAllRule()
+    public function testRequiredWithoutAllRule(): void
     {
         $v1 = $this->validator->validate([
             'b' => '',
@@ -530,7 +534,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($v2->passes());
     }
 
-    public function testRulePresent()
+    public function testRulePresent(): void
     {
         $v1 = $this->validator->validate([
         ], [
@@ -546,9 +550,9 @@ class ValidatorTest extends TestCase
         $this->assertTrue($v2->passes());
     }
 
-    public function testNonExistentValidationRule()
+    public function testNonExistentValidationRule(): void
     {
-        $this->expectException(\Rakit\Validation\RuleNotFoundException::class);
+        $this->expectException(RuleNotFoundException::class);
         $validation = $this->validator->make([
             'name' => "some name"
         ], [
@@ -561,7 +565,7 @@ class ValidatorTest extends TestCase
         $validation->validate();
     }
 
-    public function testBeforeRule()
+    public function testBeforeRule(): void
     {
         $data = ["date" => (new DateTime())->format('Y-m-d')];
 
@@ -582,7 +586,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validator2->passes());
     }
 
-    public function testAfterRule()
+    public function testAfterRule(): void
     {
         $data = ["date" => (new DateTime())->format('Y-m-d')];
 
@@ -603,7 +607,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validator2->passes());
     }
 
-    public function testNewValidationRuleCanBeAdded()
+    public function testNewValidationRuleCanBeAdded(): void
     {
 
         $this->validator->addValidator('even', new Even());
@@ -617,9 +621,9 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validation->passes());
     }
 
-    public function testInternalValidationRuleCannotBeOverridden()
+    public function testInternalValidationRuleCannotBeOverridden(): void
     {
-        $this->expectException(\Rakit\Validation\RuleQuashException::class);
+        $this->expectException(RuleQuashException::class);
         $this->validator->addValidator('required', new Required());
 
         $data = ['s' => json_encode(['name' => 'space x', 'human' => false])];
@@ -629,7 +633,7 @@ class ValidatorTest extends TestCase
         $validation->validate();
     }
 
-    public function testInternalValidationRuleCanBeOverridden()
+    public function testInternalValidationRuleCanBeOverridden(): void
     {
         $this->validator->allowRuleOverride(true);
 
@@ -645,7 +649,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validation->passes());
     }
 
-    public function testIgnoreNextRulesWhenImplicitRulesFails()
+    public function testIgnoreNextRulesWhenImplicitRulesFails(): void
     {
         $validation = $this->validator->validate([
             'some_value' => 1
@@ -677,7 +681,7 @@ class ValidatorTest extends TestCase
         $this->assertNull($errors->first('must_accepted_field:min'));
     }
 
-    public function testNextRulesAppliedWhenEmptyValueWithPresent()
+    public function testNextRulesAppliedWhenEmptyValueWithPresent(): void
     {
         $validation = $this->validator->validate([
             'must_present_field' => '',
@@ -693,7 +697,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('must_present_field:array'));
     }
 
-    public function testIgnoreOtherRulesWhenAttributeIsNotRequired()
+    public function testIgnoreOtherRulesWhenAttributeIsNotRequired(): void
     {
         $validation = $this->validator->validate([
             'an_empty_file' => [
@@ -713,7 +717,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validation->passes());
     }
 
-    public function testDontIgnoreOtherRulesWhenValueIsNotEmpty()
+    public function testDontIgnoreOtherRulesWhenValueIsNotEmpty(): void
     {
         $validation = $this->validator->validate([
             'an_error_file' => [
@@ -734,7 +738,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($validation->errors()->count(), 4);
     }
 
-    public function testDontIgnoreOtherRulesWhenAttributeIsRequired()
+    public function testDontIgnoreOtherRulesWhenAttributeIsRequired(): void
     {
         $validation = $this->validator->validate([
             'optional_field' => 'have a value',
@@ -753,7 +757,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('required_if_field:email'));
     }
 
-    public function testRegisterRulesUsingInvokes()
+    public function testRegisterRulesUsingInvokes(): void
     {
         $validator = $this->validator;
         $validation = $this->validator->validate([
@@ -793,7 +797,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals(implode(',', $errors->all()), '1,2,3,4,5,6,7,8,9,10');
     }
 
-    public function testArrayAssocValidation()
+    public function testArrayAssocValidation(): void
     {
         $validation = $this->validator->validate([
             'user' => [
@@ -816,7 +820,7 @@ class ValidatorTest extends TestCase
         $this->assertNull($errors->first('user.name:required'));
     }
 
-    public function testEmptyArrayAssocValidation()
+    public function testEmptyArrayAssocValidation(): void
     {
         $validation = $this->validator->validate([], [
             'user'=> 'required',
@@ -831,12 +835,12 @@ class ValidatorTest extends TestCase
      *
      * @dataProvider rootAsteriskProvider
      */
-    public function testRootAsteriskValidation(array $data, array $rules, $errors = null)
+    public function testRootAsteriskValidation(array $data, array $rules, array $errors = null): void
     {
         $validation = $this->validator->validate($data, $rules);
-        $this->assertSame(empty($errors), $validation->passes());
+        $this->assertSame($errors === null || $errors === [], $validation->passes());
         $errorBag = $validation->errors();
-        if (!empty($errors)) {
+        if ($errors !== null && $errors !== []) {
             foreach ($errors as $error) {
                 $field = $error[0];
                 $rule = $error[1] ?? null;
@@ -891,7 +895,7 @@ class ValidatorTest extends TestCase
         ];
     }
 
-    public function testArrayValidation()
+    public function testArrayValidation(): void
     {
         $validation = $this->validator->validate([
             'cart_items' => [
@@ -916,7 +920,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('cart_items.4.id_product:numeric'));
     }
 
-    public function testSetCustomMessagesInValidator()
+    public function testSetCustomMessagesInValidator(): void
     {
         $this->validator->setMessages([
             'required' => 'foo',
@@ -948,7 +952,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('comments.0.text:required'), 'baz');
     }
 
-    public function testSetCustomMessagesInValidation()
+    public function testSetCustomMessagesInValidation(): void
     {
         $validation = $this->validator->make([
             'foo' => null,
@@ -982,12 +986,13 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('comments.0.text:required'), 'baz');
     }
 
-    public function testCustomMessageInCallbackRule()
+    public function testCustomMessageInCallbackRule(): void
     {
-        $evenNumberValidator = function ($value) {
-            if (!is_numeric($value) or $value % 2 !== 0) {
+        $evenNumberValidator = function ($value): string|bool {
+            if (!is_numeric($value) || $value % 2 !== 0) {
                 return ":attribute must be even number";
             }
+
             return true;
         };
 
@@ -1003,7 +1008,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('foo:callback'), "Foo must be even number");
     }
 
-    public function testSpecificRuleMessage()
+    public function testSpecificRuleMessage(): void
     {
         $validation = $this->validator->make([
             'something' => 'value',
@@ -1025,7 +1030,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('something:max'), 'baz');
     }
 
-    public function testSetAttributeAliases()
+    public function testSetAttributeAliases(): void
     {
         $validation = $this->validator->make([
             'foo' => null,
@@ -1066,7 +1071,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('comments.0.text:required'), 'Qux qux');
     }
 
-    public function testUsingDefaults()
+    public function testUsingDefaults(): void
     {
         $validation = $this->validator->validate([
             'is_active' => null,
@@ -1106,7 +1111,7 @@ class ValidatorTest extends TestCase
         ]);
     }
 
-    public function testHumanizedKeyInArrayValidation()
+    public function testHumanizedKeyInArrayValidation(): void
     {
         $validation = $this->validator->validate([
             'cart' => [
@@ -1125,7 +1130,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('cart.*.itemName'), 'The Cart 1 item name is required');
     }
 
-    public function testCustomMessageInArrayValidation()
+    public function testCustomMessageInArrayValidation(): void
     {
         $validation = $this->validator->make([
             'cart' => [
@@ -1164,7 +1169,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($errors->first('cart.*.attributes.*.value'), 'Item 2 attribute 1 value is required');
     }
 
-    public function testRequiredIfOnArrayAttribute()
+    public function testRequiredIfOnArrayAttribute(): void
     {
         $validation = $this->validator->validate([
             'products' => [
@@ -1198,7 +1203,7 @@ class ValidatorTest extends TestCase
         $this->assertNull($errors->first('products.14.notes'));
     }
 
-    public function testRequiredUnlessOnArrayAttribute()
+    public function testRequiredUnlessOnArrayAttribute(): void
     {
         $validation = $this->validator->validate([
             'products' => [
@@ -1232,7 +1237,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('products.14.notes'));
     }
 
-    public function testSameRuleOnArrayAttribute()
+    public function testSameRuleOnArrayAttribute(): void
     {
         $validation = $this->validator->validate([
             'users' => [
@@ -1256,7 +1261,7 @@ class ValidatorTest extends TestCase
         $this->assertNotNull($errors->first('users.1.password_confirmation:same'));
     }
 
-    public function testGetValidData()
+    public function testGetValidData(): void
     {
         $validation = $this->validator->validate([
             'items' => [
@@ -1313,7 +1318,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse(isset($stuffs['three']));
     }
 
-    public function testGetInvalidData()
+    public function testGetInvalidData(): void
     {
         $validation = $this->validator->validate([
             'items' => [
@@ -1367,7 +1372,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse(isset($stuffs['two']));
     }
 
-    public function testValidated()
+    public function testValidated(): void
     {
         $validation = $this->validator->validate([
             'emails' => [
@@ -1391,7 +1396,7 @@ class ValidatorTest extends TestCase
         ], $validData);
     }
 
-    public function testValidatedException()
+    public function testValidatedException(): void
     {
         $this->expectException(ValidationException::class);
         $validation = $this->validator->validate([
@@ -1426,7 +1431,7 @@ class ValidatorTest extends TestCase
         $validation->validated();
     }
 
-    public function testValidatedExceptionData()
+    public function testValidatedExceptionData(): void
     {
         try {
             $validation = $this->validator->validate([
@@ -1434,19 +1439,19 @@ class ValidatorTest extends TestCase
                 'thing' => 'required'
             ]);
             $validation->validated();
-        } catch (ValidationException $e) {
+        } catch (ValidationException $validationException) {
             $this->assertSame(
                 [
                     'thing' => [
                         'required'=> 'The Thing is required'
                     ]
                 ],
-                $e->getErrors()
+                $validationException->getErrors()
             );
         }
     }
 
-    public function testRuleInInvalidMessages()
+    public function testRuleInInvalidMessages(): void
     {
         $validation = $this->validator->validate([
             'number' => 1
@@ -1468,7 +1473,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($validation->errors()->first('number'), "The Number only allows '7', '8', atau '9'");
     }
 
-    public function testRuleNotInInvalidMessages()
+    public function testRuleNotInInvalidMessages(): void
     {
         $validation = $this->validator->validate([
             'number' => 1
@@ -1490,7 +1495,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($validation->errors()->first('number'), "The Number is not allowing '1', '2', dan '3'");
     }
 
-    public function testRuleMimesInvalidMessages()
+    public function testRuleMimesInvalidMessages(): void
     {
         $file = [
             'name' => 'sample.txt',
@@ -1522,7 +1527,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($validation->errors()->first('sample'), $expectedMessage);
     }
 
-    public function testRuleUploadedFileInvalidMessages()
+    public function testRuleUploadedFileInvalidMessages(): void
     {
         $file = [
             'name' => 'sample.txt',
@@ -1586,7 +1591,7 @@ class ValidatorTest extends TestCase
         $this->assertEquals($validation->errors()->first('sample'), $expectedMessage);
     }
 
-    public function testIgnoreNextRulesWithNullableRule()
+    public function testIgnoreNextRulesWithNullableRule(): void
     {
         $emptyFile = [
             'name' => '',
@@ -1626,7 +1631,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validation2->passes());
     }
 
-    public function testNumericStringSizeWithoutNumericRule()
+    public function testNumericStringSizeWithoutNumericRule(): void
     {
         $validation = $this->validator->validate([
             'number' => '1.2345'
@@ -1637,7 +1642,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse($validation->passes());
     }
 
-    public function testNumericStringSizeWithNumericRule()
+    public function testNumericStringSizeWithNumericRule(): void
     {
         $validation = $this->validator->validate([
             'number' => '1.2345'

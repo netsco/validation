@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class UrlTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Url;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         // Without specific schemes
         $this->assertTrue($this->rule->check('ftp://foobar.com'));
@@ -41,7 +42,7 @@ class UrlTest extends TestCase
         $this->assertTrue($this->rule->forScheme('jdbc')->check('jdbc:mysql://localhost/dbname'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('foo:'));
         $this->assertFalse($this->rule->check('mailto:johndoe@gmail.com'));

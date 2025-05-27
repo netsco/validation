@@ -15,7 +15,6 @@ class RequiredWithAll extends Required
     /**
      * Given $params and assign $this->params
      *
-     * @param array $params
      * @return self
      */
     public function fillParameters(array $params): Rule
@@ -28,7 +27,6 @@ class RequiredWithAll extends Required
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {

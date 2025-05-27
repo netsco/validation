@@ -15,7 +15,6 @@ class RequiredUnless extends Required
     /**
      * Given $params and assign the $this->params
      *
-     * @param array $params
      * @return self
      */
     public function fillParameters(array $params): Rule
@@ -29,7 +28,6 @@ class RequiredUnless extends Required
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {

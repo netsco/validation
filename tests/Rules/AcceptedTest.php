@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class AcceptedTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Accepted;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('yes'));
         $this->assertTrue($this->rule->check('on'));
@@ -23,7 +24,7 @@ class AcceptedTest extends TestCase
         $this->assertTrue($this->rule->check('true'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check(''));
         $this->assertFalse($this->rule->check('onn'));

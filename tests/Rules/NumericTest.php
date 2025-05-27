@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class NumericTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Numeric;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('123'));
         $this->assertTrue($this->rule->check('123.456'));
@@ -22,7 +23,7 @@ class NumericTest extends TestCase
         $this->assertTrue($this->rule->check(123.456));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('foo123'));
         $this->assertFalse($this->rule->check('123foo'));

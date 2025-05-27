@@ -8,19 +8,20 @@ use PHPUnit\Framework\TestCase;
 class UppercaseTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Uppercase;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('USERNAME'));
         $this->assertTrue($this->rule->check('FULL NAME'));
         $this->assertTrue($this->rule->check('FULL_NAME'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check('username'));
         $this->assertFalse($this->rule->check('Username'));

@@ -8,19 +8,20 @@ use PHPUnit\Framework\TestCase;
 class EmailTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Email;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->check('johndoe@gmail.com'));
         $this->assertTrue($this->rule->check('johndoe@foo.bar'));
         $this->assertTrue($this->rule->check('foo123123@foo.bar.baz'));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->check(1));
         $this->assertFalse($this->rule->check('john doe@gmail.com'));

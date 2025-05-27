@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 class BetweenTest extends TestCase
 {
 
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Between;
     }
 
-    public function testValids()
+    public function testValids(): void
     {
         $this->assertTrue($this->rule->fillParameters([6, 10])->check('foobar'));
         $this->assertTrue($this->rule->fillParameters([6, 10])->check('футбол'));
@@ -22,7 +23,7 @@ class BetweenTest extends TestCase
         $this->assertTrue($this->rule->fillParameters([100, 150])->check(123.4));
     }
 
-    public function testInvalids()
+    public function testInvalids(): void
     {
         $this->assertFalse($this->rule->fillParameters([2, 5])->check('foobar'));
         $this->assertFalse($this->rule->fillParameters([2, 5])->check('футбол'));
@@ -31,9 +32,9 @@ class BetweenTest extends TestCase
         $this->assertFalse($this->rule->fillParameters([50, 100])->check(123.4));
     }
 
-    public function testUploadedFileValue()
+    public function testUploadedFileValue(): void
     {
-        $mb = fn($n) => $n * 1024 * 1024;
+        $mb = fn($n): int|float => $n * 1024 * 1024;
 
         $sampleFile = [
             'name' => pathinfo(__FILE__, PATHINFO_BASENAME),

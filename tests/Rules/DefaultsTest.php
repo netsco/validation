@@ -7,12 +7,13 @@ use PHPUnit\Framework\TestCase;
 
 class DefaultsTest extends TestCase
 {
-    public function setUp():void
+    public $rule;
+    protected function setUp():void
     {
         $this->rule = new Defaults;
     }
 
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $this->assertTrue($this->rule->fillParameters([10])->check(0));
         $this->assertTrue($this->rule->fillParameters(['something'])->check(null));

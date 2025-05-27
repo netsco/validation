@@ -14,7 +14,6 @@ class Extension extends Rule
      /**
      * Given $params and assign the $this->params
      *
-     * @param array $params
      * @return self
      */
     public function fillParameters(array $params): Rule
@@ -22,6 +21,7 @@ class Extension extends Rule
         if (count($params) == 1 && is_array($params[0])) {
             $params = $params[0];
         }
+
         $this->params['allowed_extensions'] = $params;
         return $this;
     }
@@ -30,7 +30,6 @@ class Extension extends Rule
      * Check the $value is valid
      *
      * @param mixed $value
-     * @return bool
      */
     public function check($value): bool
     {
@@ -45,6 +44,6 @@ class Extension extends Rule
         $this->setParameterText('allowed_extensions', $allowedExtensionsText);
 
         $ext = strtolower(pathinfo($value, PATHINFO_EXTENSION));
-        return ($ext && in_array($ext, $allowedExtensions)) ? true : false;
+        return $ext && in_array($ext, $allowedExtensions);
     }
 }

@@ -10,11 +10,8 @@ trait FileTrait
 
     /**
      * Check whether value is from $_FILES
-     *
-     * @param mixed $value
-     * @return bool
      */
-    public function isValueFromUploadedFiles($value): bool
+    public function isValueFromUploadedFiles(mixed $value): bool
     {
         if (!is_array($value)) {
             return false;
@@ -32,11 +29,8 @@ trait FileTrait
 
     /**
      * Check the $value is uploaded file
-     *
-     * @param mixed $value
-     * @return bool
      */
-    public function isUploadedFile($value): bool
+    public function isUploadedFile(mixed $value): bool
     {
         return $this->isValueFromUploadedFiles($value) && is_uploaded_file($value['tmp_name']);
     }
@@ -44,10 +38,9 @@ trait FileTrait
     /**
      * Resolve uploaded file value
      *
-     * @param  mixed $value
      * @return array|null
      */
-    public function resolveUploadedFileValue($value)
+    public function resolveUploadedFileValue(mixed $value)
     {
         if (!$this->isValueFromUploadedFiles($value)) {
             return null;
@@ -77,10 +70,11 @@ trait FileTrait
             // name.foo.bar -> foo.bar.name
             $splits = explode(".", $key);
             $firstKey = array_shift($splits);
-            $key = count($splits) ? implode(".", $splits) . ".{$firstKey}" : $firstKey;
+            $key = $splits !== [] ? implode(".", $splits) . ".{$firstKey}" : $firstKey;
 
             Helper::arraySet($results, $key, $val);
         }
+
         return $results;
     }
 }
