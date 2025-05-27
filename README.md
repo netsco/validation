@@ -19,7 +19,7 @@ PHP Standalone library for validating data. Inspired by `Illuminate\Validation` 
 
 ## Requirements
 
-* PHP 7.0 or higher
+* PHP 8.0 or higher
 * Composer for installation
 
 ## Quick Start
@@ -513,7 +513,7 @@ The field under validation must be present and not empty only when any of the ot
 <details><summary><strong>required_with_all</strong>:field_1,field_2,...</summary>
 # PHP 8 Compatibility
 
-This project supports PHP 7.0 and higher, including PHP 8.0, 8.1, and 8.2.
+This project supports PHP 8.0 and higher, including PHP 8.1, 8.2, 8.3, and 8.4.
 
 ## Upgrading Code Using Rector
 
