@@ -37,10 +37,10 @@ To run only PHPUnit tests:
 vendor/bin/phpunit
 ```
 
-To run only PHP CodeSniffer checks:
+To run only Pint checks:
 
 ```
-vendor/bin/phpcs
+vendor/bin/pint
 ```
 
 ### Adding New Tests
@@ -121,10 +121,9 @@ class SimpleTest extends TestCase
 
 ### Coding Standards
 
-The project follows PSR-2 coding standards. The PHP CodeSniffer configuration is defined in `phpcs.xml`:
+The project follows PSR-12 coding standards. The Laravel Pint configuration is defined in `pint.json`:
 
-- PSR-2 rules are enforced
-- Long array syntax (using `array()` instead of `[]`) is disallowed
+- PSR-12 rules are enforced
 - Both `src` and `tests` directories are checked
 
 ### Code Refactoring with Rector
